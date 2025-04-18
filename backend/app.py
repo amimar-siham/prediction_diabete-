@@ -47,7 +47,7 @@ def encode_auth_token(user_id, role):
         payload = {
             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),
             'iat': datetime.datetime.utcnow(),
-            'sub': user_id,
+            'sub': str(user_id),
             'role': role
         }
         return jwt.encode(payload, 'your_jwt_secret_key', algorithm='HS256')

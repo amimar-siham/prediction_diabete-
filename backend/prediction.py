@@ -8,6 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 # Loading the dataset
 df = pd.read_csv('diabetes.csv')
 
+
 # Renaming DiabetesPedigreeFunction as DPF
 df = df.rename(columns={'DiabetesPedigreeFunction':'DPF'})
 
@@ -16,11 +17,11 @@ df_copy = df.copy(deep=True)
 df_copy[['Glucose','BloodPressure','SkinThickness','Insulin','BMI']] = df_copy[['Glucose','BloodPressure','SkinThickness','Insulin','BMI']].replace(0,np.nan)
 
 # Replacing NaN value by mean, median depending upon distribution
-df_copy['Glucose'].fillna(df_copy['Glucose'].mean(), inplace=True)
-df_copy['BloodPressure'].fillna(df_copy['BloodPressure'].mean(), inplace=True)
-df_copy['SkinThickness'].fillna(df_copy['SkinThickness'].median(), inplace=True)
-df_copy['Insulin'].fillna(df_copy['Insulin'].median(), inplace=True)
-df_copy['BMI'].fillna(df_copy['BMI'].median(), inplace=True)
+df_copy['Glucose'] = df_copy['Glucose'].fillna(df_copy['Glucose'].mean())
+df_copy['BloodPressure'] = df_copy['BloodPressure'].fillna(df_copy['BloodPressure'].mean())
+df_copy['SkinThickness'] = df_copy['SkinThickness'].fillna(df_copy['SkinThickness'].median())
+df_copy['Insulin'] = df_copy['Insulin'].fillna(df_copy['Insulin'].median())
+df_copy['BMI'].fillna(df_copy['BMI'].median())
 
 # Model Building
 X = df.drop(columns='Outcome')
